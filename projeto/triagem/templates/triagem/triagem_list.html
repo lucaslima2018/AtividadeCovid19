@@ -24,6 +24,8 @@
 			<th>Diarréia</th>
 			<th>Viajou</th>
 			<th>Contato</th>
+			<th>Probabilidade</th>
+			<th>Risco</th>
   			<th class="text-center">Editar</th>
   			<th class="text-center">Excluir</th>
   		</thead>
@@ -42,6 +44,8 @@
 					<td>{{ triagem.diarreia }}</td>
 					<td>{{ triagem.viagem }}</td>
 					<td>{{ triagem.contato }}</td>
+					<td>{{ triagem.probabilidade }}</td>
+					<td>{{ triagem.risco }}</td>
 					<td class="text-center">
 				          {% bootstrap_button content='' href=triagem.get_absolute_url button_type='link' icon='edit' button_class='btn btn-primary' size='sm' %}
 				    </td>

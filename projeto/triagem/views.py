@@ -16,13 +16,19 @@ from .models import Triagem
 
 class TriagemListView(LoginRequiredMixin,  StaffRequiredMixin, ListView):
     model = Triagem
-    fields = ['codigo', 'febre', 'dorcabeca', 'secrecaonasa', 'dorgarganta', 'tosse', 'difrespiratoria', 'dorcorpo', 'diarreia', 'viagem', 'contato']
+    fields = ['codigo', 'febre', 'dorcabeca', 'secrecaonasa', 'dorgarganta', 'tosse', 'difrespiratoria', 'dorcorpo', 'diarreia', 'viagem', 'contato', 'probabilidade', 'risco']
 
 
 class TriagemCreateView(LoginRequiredMixin,  StaffRequiredMixin, CreateView):
     model = Triagem
     fields = ['codigo', 'febre', 'dorcabeca', 'secrecaonasal', 'dorgarganta', 'tosse', 'difrespiratoria', 'dorcorpo', 'diarreia', 'viagem', 'contato']
     success_url = 'triagem_list'
+
+    def form_valid(self, form):
+        triagem = form.instance
+        triagem.calcula_valor()
+        triagem.save()
+
     
     def get_success_url(self):
         messages.success(self.request, 'Triagem cadastrada com sucesso na plataforma!')
@@ -31,7 +37,7 @@ class TriagemCreateView(LoginRequiredMixin,  StaffRequiredMixin, CreateView):
 
 class TriagemUpdateView(LoginRequiredMixin,  StaffRequiredMixin, UpdateView):
     model = Triagem
-    fields = ['codigo', 'febre', 'dorcabeca', 'secrecaonasa', 'dorgarganta', 'tosse', 'difrespiratoria', 'dorcorpo', 'diarreia', 'viagem', 'contato']
+    fields = ['codigo', 'febre', 'dorcabeca', 'secrecaonasa', 'dorgarganta', 'tosse', 'difrespiratoria', 'dorcorpo', 'diarreia', 'viagem', 'contato', 'probabilidade', 'risco']
     success_url = 'triagem_list'
     
     def get_success_url(self):
